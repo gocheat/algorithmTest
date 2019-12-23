@@ -47,11 +47,12 @@ LRUCache.prototype.put = function(key, data){
 
 LRUCache.prototype.get = function(key){
     if(this.has(key)){
+        let temp = this.nodes[key]
         this.delete(this.nodes[key])
-        this.insertHead(key, this.nodes[key])
+        this.insertHead(temp)
         return this.nodes[key]
     }
-    console.log(`해당 데이터가 존재하지 않습니다: ${key}`)
+   return -1
 }
 
 LRUCache.prototype.has = function(key){
@@ -65,7 +66,7 @@ LRUCache.prototype.has = function(key){
 LRUCache.prototype.delete = function(deleteNode){
     deleteNode.prev.next = deleteNode.next
     deleteNode.next.prev = deleteNode.prev
-    delete(this.nodes, deleteNode.key)
+    delete this.nodes[deleteNode.key]
     this.size--
 }
 
@@ -75,6 +76,7 @@ LRUCache.prototype.insertHead = function(newNode){
 
     this.head.next.prev = newNode
     this.head.next = newNode
+    this.nodes[newNode.key] = newNode
     this.size++
 }
 
