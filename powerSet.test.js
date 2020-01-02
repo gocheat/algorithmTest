@@ -12,4 +12,5 @@ test('PowerSet Test', () => {
         }
     })
     console.log(set)
+    expect(list.length << 2).toBe(set.length+1) //null 포함하여 비교
 });

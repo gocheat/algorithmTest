@@ -87,7 +87,7 @@ LFUCache.prototype.insertHead = function(newNode){
     this.head.next = newNode
     this.nodes[newNode.key] = newNode
     this.nodesCount[newNode.key] = 0
-        this.size++
+    this.size++
 }
 
 export default LFUCache
