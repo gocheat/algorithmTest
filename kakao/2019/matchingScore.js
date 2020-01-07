@@ -33,7 +33,7 @@ function matchingScore(word, pages) {
             }
         }
 
-        if (outLink){
+        if (outLink && outLink.length > 1){
             matchedIndexOfUrl[i] = outLink[0]
             matchInfos[i] = {
                 link: outLink.slice(1) || [],
@@ -49,11 +49,12 @@ function matchingScore(word, pages) {
         let matchInfo = matchInfos[i]
         matchInfo.link.forEach((l, i) =>{
             let matchedIndex = Object.values(matchedIndexOfUrl).findIndex(v => l === v)
-            if(matchedIndex && matchedIndex >= 0 ){
+            if( matchedIndex >= 0 ){
                 matchInfos[matchedIndex]["outLinkScore"] += matchInfo.addScore
             }
         })
     }
+
     //
     matchInfos.sort((a, b)=>{
         let as = (a.defaultScore + a.outLinkScore)
