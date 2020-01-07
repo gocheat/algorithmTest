@@ -38,7 +38,7 @@ function matchingScore(word, pages) {
             matchInfos[i] = {
                 link: outLink.slice(1) || [],
                 defaultScore: wordScore,
-                addScore: wordScore / outLink.slice(1).length,
+                addScore: wordScore / outLink.slice(1).length || 0,
                 index: +i,
                 outLinkScore: 0
             }
@@ -49,7 +49,7 @@ function matchingScore(word, pages) {
         let matchInfo = matchInfos[i]
         matchInfo.link.forEach((l, i) =>{
             let matchedIndex = Object.values(matchedIndexOfUrl).findIndex(v => l === v)
-            if(matchedIndex >= 0){
+            if(matchedIndex && matchedIndex >= 0 ){
                 matchInfos[matchedIndex]["outLinkScore"] += matchInfo.addScore
             }
         })
